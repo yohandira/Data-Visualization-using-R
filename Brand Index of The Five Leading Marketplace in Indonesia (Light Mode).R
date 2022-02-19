@@ -1,7 +1,7 @@
-# Set a working directory
+# Set desktop as working directory
 setwd("~/Desktop")
 
-# Create a data frame
+# Create brand index data frame
 brand_index_raw <- data.frame(
   year = (2015:2021),
   tokopedia = c(1.2, 12.1, 13.4, 18.5, 13.4, 15.8, 16.7),
@@ -16,14 +16,14 @@ brand_index_raw
 # Import libraries
 library(imputeTS)
 
-# Handle missing values
+# Fill in missing values with linear interpolation
 for (i in c(3, 5, 6)) {
   brand_index_raw[ , i] <- na_interpolation(brand_index_raw[ , i])
 }
 
 brand_index_raw
 
-# Create an avarage data frame
+# Create the avarage brand index data frame
 brand_index_avg <- colMeans(x = brand_index_raw[2:6])
 brand_index_avg <- round(x = brand_index_avg, digits = 3)
 brand_index_avarage <- sort(brand_index_avg, decreasing = TRUE)
@@ -215,7 +215,7 @@ brand_index_plot <-
   labs(
     x = NULL,
     y = NULL,
-    title = "Brand Index of The Five Leading Marketplace in Indonesia",
+    title = "Brand Index of The Five Leading Marketplaces in Indonesia",
     subtitle = "Based on online shopping site category, in percent",
     caption = "Source: Top Brand Index Phase 2 2015-2021, Top Brand Award"
   ) +
